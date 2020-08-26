@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zm.demo.mapper.DbMapper">
+
+
+    <select id="getAllTables" resultType="com.zm.demo.entity.TableEntity">
+        select TABLE_NAME,TABLE_COMMENT
+        from information_schema.TABLES
+        where TABLE_SCHEMA = #{dbName}
+    </select>
+
+    <select id="getAllFields" resultType="com.zm.demo.entity.ColumnEntity">
+        select COLUMN_COMMENT,COLUMN_NAME,DATA_TYPE,IS_NULLABLE as nullable,CHARACTER_MAXIMUM_LENGTH as charLength,NUMERIC_PRECISION as numLength
+        from information_schema.COLUMNS
+        where TABLE_SCHEMA = #{dbName} and table_name = #{tableName}
+    </select>
+
+</mapper>
